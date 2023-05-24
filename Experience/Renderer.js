@@ -2,7 +2,7 @@ import * as THREE from 'three'
 
 import Experience from "./Experience";
 
-export default class Remderer {
+export default class Renderer {
   constructor() {
     this.experience = new Experience()
     this.sizes = this.experience.sizes
@@ -20,7 +20,7 @@ export default class Remderer {
     })
 
     this.renderer.useLegacyLights =  true
-    this.renderer.linearEncoding = THREE.LinearSRGBColorSpace
+    this.renderer.outputColorSpace = THREE.LinearSRGBColorSpace
     this.renderer.toneMapping = THREE.CineonToneMapping
     this.renderer.toneMappingExposure = 1.75
     this.renderer.shadowMap.enabled = true
@@ -30,7 +30,7 @@ export default class Remderer {
   }
 
   resize() {
-    this.renderer.setSize(this.sizes.width, THREE.sizes.height)
+    this.renderer.setSize(this.sizes.width, this.sizes.height)
     this.renderer.setPixelRatio(this.sizes.pixelRation)
   }
 

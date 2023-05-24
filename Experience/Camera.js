@@ -21,6 +21,7 @@ export default class Camera {
       1000
     )
     this.scene.add(this.perspectiveCamera)
+    this.perspectiveCamera.position.z = 5
   }
 
   createOrthographicCamera() {
@@ -46,7 +47,7 @@ export default class Camera {
     this.orthographicCamera.right = (this.sizes.aspect * this.sizes.frustrum) / 2
     this.orthographicCamera.top = this.sizes.frustrum / 2
     this.orthographicCamera.bottom = -this.sizes.frustrum / 2
-    this.perspectiveCamera.updateProjectionMatrix()
+    this.orthographicCamera.updateProjectionMatrix()
   }
 
   update() {
