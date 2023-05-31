@@ -29,11 +29,10 @@ export default class Controls {
 
   setPath() {
     this.curve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3( -10, 0, 10 ),
-      new THREE.Vector3( -5, 5, 5 ),
-      new THREE.Vector3( 0, 0, 0 ),
-      new THREE.Vector3( 5, -5, 5 ),
-      new THREE.Vector3( 10, 0, 10 )
+      new THREE.Vector3(-5, 0, 0),
+      new THREE.Vector3(0, 0, -5),
+      new THREE.Vector3(5, 0, 0),
+      new THREE.Vector3(0, 0, 5),
     ], true)
     
     const points = this.curve.getPoints( 50 )
