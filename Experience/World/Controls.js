@@ -23,6 +23,10 @@ export default class Controls {
     this.position = new THREE.Vector3(0, 0, 0)
     this.lookAtPosition = new THREE.Vector3(0, 0, 0)
 
+    this.directionalVector = new THREE.Vector3(0, 0, 0)
+    this.staticVector = new THREE.Vector3(0, 1, 0)
+    this.crossVector = new THREE.Vector3(0, 0, 0)
+
     this.setPath()
     this.onWheel()
   }
@@ -70,20 +74,19 @@ export default class Controls {
       this.lerp.target,
       this.lerp.ease
     )
-
-    if (this.back) {
-      this.lerp.target -= 0.001
-    } else {
-      this.lerp.target += 0.001
-    }
-    
-    this.lerp.target = GSAP.utils.clamp(0, 1, this.lerp.target)
-    this.lerp.current = GSAP.utils.clamp(0, 1, this.lerp.current)
-    this.curve.getPointAt(this.lerp.current, this.position)
-
-    this.curve.getPointAt(this.lerp.current + 0.00001, this.lookAtPosition)
-
+    this.curve.getPointAt(this.lerp.current % 1, this.position)
     this.camera.orthographicCamera.position.copy(this.position)
-    this.camera.orthographicCamera.lookAt(this.lookAtPosition)
+
+    this.directionalVector.subVectors(
+      this.curve.getPointAt((this.lerp.current % 1) + 0.000001),
+      this.position
+    )
+    this.directionalVector.normalize()
+    this.crossVector.crossVectors(
+      this.directionalVector,
+      this.staticVector
+    )
+    // this.crossVector.multiplyScalar(100000)
+    this.camera.orthographicCamera.lookAt(this.crossVector)
   }
 }
