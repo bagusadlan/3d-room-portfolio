@@ -27,6 +27,10 @@ export default class Environment {
     this.ambientLight = new THREE.AmbientLight("#ffffff", 1)
     this.scene.add(this.ambientLight)
   }
+  
+  switchTheme(theme) {
+
+  }
 
   resize() {
 

@@ -6,6 +6,7 @@ import Resources from "./Utils/Resources"
 import assets from "./Utils/assets"
 
 import Camera from './Camera'
+import Theme from './Theme'
 import Renderer from './Renderer'
 
 import World from './World/World'
@@ -24,6 +25,7 @@ export default class Experience {
     this.camera = new Camera()
     this.renderer = new Renderer()
     this.resources = new Resources(assets)
+    this.theme = new Theme()
     this.world = new World()
 
     this.time.on('update', () => {
