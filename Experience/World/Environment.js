@@ -1,4 +1,6 @@
 import * as THREE from 'three'
+import GSAP from 'gsap'
+import GUI from 'lil-gui'
 
 import Experience from "../Experience";
 
@@ -8,7 +10,18 @@ export default class Environment {
     this.scene = this.experience.scene
     this.resources = this.experience.resources
 
+    this.gui = new GUI({ container: document.querySelector('.hero-main')})
+    this.obj = {
+      colorObj: {
+        r: 0,
+        g: 0,
+        b: 0
+      },
+      intensity: 1
+    }
+
     this.setSunlight()
+    this.setGUI()
   }
 
   setSunlight() {
@@ -27,9 +40,21 @@ export default class Environment {
     this.ambientLight = new THREE.AmbientLight("#ffffff", 1)
     this.scene.add(this.ambientLight)
   }
-  
-  switchTheme(theme) {
 
+  setGUI() {
+    this.gui.addColor(this.obj, "colorObj").onChange(() => {
+      this.sunLight.color.copy(this.obj.colorObj)
+      this.ambientLight.color.copy(this.obj.colorObj)
+      console.log(this.obj.colorObj);
+    })
+    this.gui.add(this.obj, "intensity").onChange(() => {
+      this.sunLight.intensity = this.obj.intensity
+      this.ambientLight.intensity = this.obj.intensity
+    })
+  }
+
+  switchTheme(theme) {
+    
   }
 
   resize() {
