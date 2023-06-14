@@ -303,3 +303,9 @@ svg {
 .green-background {
   background-color: var(--color-green);
 }
+
+@media (max-width: 968px) {
+  .section {
+    width: 100%;
+  }
+}
