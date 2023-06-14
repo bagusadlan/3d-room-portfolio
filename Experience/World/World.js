@@ -16,6 +16,7 @@ export default class World {
     this.camera = this.experience.camera
     this.resources = this.experience.resources
     this.theme = this.experience.theme
+    this.room = this.experience.room
 
     this.resources.on('ready', () => {
       this.environment = new Environment()
@@ -32,6 +33,9 @@ export default class World {
   switchTheme(theme) {
     if (this.environment) {
       this.environment.switchTheme(theme)
+    }
+    if (this.room) {
+      this.room.turnOnTheLight(theme)
     }
   }
 
