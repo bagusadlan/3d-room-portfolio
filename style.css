@@ -57,6 +57,7 @@ svg {
   --body-color-rgb: 23, 20, 18;
   --container-color: hsl(19, 10%, 10%);
 } */
+
 /* Experience -------------------------------- */
 .experience {
   position: fixed;
@@ -277,4 +278,34 @@ svg {
   font-size: 32px;
   text-transform: uppercase;
   color: var(--color-text);
+}
+
+.blue-text {
+  color: var(--color-blue);
+}
+
+.blue-border {
+  border-color: var(--color-blue);
+}
+
+.blue-background {
+  background-color: var(--color-blue);
+}
+
+.green-text {
+  color: var(--color-green);
+}
+
+.green-border {
+  border-color: var(--color-green);
+}
+
+.green-background {
+  background-color: var(--color-green);
+}
+
+@media (max-width: 968px) {
+  .section {
+    width: 100%;
+  }
 }
