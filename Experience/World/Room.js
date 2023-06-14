@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import GSAP from "gsap"
+import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js'
 
 import Experience from "../Experience";
 
@@ -20,6 +21,7 @@ export default class Room {
 
     this.setModel()
     this.setAnimation()
+    this.setLampligt()
     this.onMouseMove()
   }
 
@@ -59,6 +61,37 @@ export default class Room {
     this.mixer = new THREE.AnimationMixer(this.actualRoom)
     this.swim = this.mixer.clipAction(this.room.animations[0])
     this.swim.play()
+  }
+
+  setLampligt() {
+    const width = 0.4
+    const height = 0.7
+    const intensity = 1
+    this.rectLight = new THREE.RectAreaLight(
+      0xd13bd1,
+      intensity,
+      width,
+      height
+    )
+    this.rectLight.position.set(8.53993, 6.39, -1.50045)
+    this.rectLight.rotation.x = -Math.PI / 2
+    this.rectLight.rotation.z = Math.PI / 4
+    this.actualRoom.add(this.rectLight)
+
+    // const rectLightHelper = new RectAreaLightHelper( rectLight )
+    // rectLight.add( rectLightHelper )
+    this.scene.add(this.actualRoom)
+  }
+
+  turnOnTheLight(theme) {
+    if (theme === "dark") {
+      setTimeout(() => {
+        // this.rectLight.intensity = 20
+        GSAP.to(this.rectLight, { intensity: 40, duration: 1 })
+      }, 1500)
+    } else {
+      this.rectLight.intensity = 0
+    }
   }
 
   onMouseMove() {

@@ -8,15 +8,55 @@
 
 html, body {
   font-family: "Monstserrat", sans-serif;
-  color: var(--text-black);
+  /* color: var(--color-text); */
+}
+
+h1,
+section,
+p,
+span,
+svg {
+  transition: background-color 0.5s, color 0.05s;
 }
 
 :root {
-  --text-black: #333333;
-  --primary-color: #FAF4E5;
-  --primary-pink: #E5A1AA;
+  /* Llight Theme Variables */
+  --color-text-light: #333332;
+  --color-background-light: #faf4e5;
+  --color-pink-light: #e5a1aa;
+  --color-green-light: #7ad0ac;
+  --color-blue-light: #8395cd;
+
+  /* Dark Theme Variables */
+  --color-text-dark: #faf4e5;
+  --color-background-dark: #8395cd;
 }
 
+.light-theme {
+  --color-text: var(--color-text-light);
+  --color-background: var(--color-background-light);
+  --color-pink: var(--color-pink-light);
+  --color-green: var(--color-green-light);
+  --color-blue: var(--color-blue-light);
+}
+
+.dark-theme {
+  --color-text: var(--color-text-dark);
+  --color-background: var(--color-background-dark);
+  --color-pink: var(--color-text-dark);
+  --color-green: var(--color-text-dark);
+  --color-blue: var(--color-text-dark);
+}
+
+/* body.dark-theme {
+  --color-background: hsl(19, 64%, 58%);
+  --first-color-alt: hsl(19, 64%, 54%);
+  --color-pink: hsl(19, 24%, 85%);
+  --color-text: hsl(19, 16%, 65%);
+  --body-color: hsl(19, 12%, 8%);
+  --body-color-rgb: 23, 20, 18;
+  --container-color: hsl(19, 10%, 10%);
+} */
 /* Experience -------------------------------- */
 .experience {
   position: fixed;
@@ -42,6 +82,60 @@ html, body {
 }
 
 /* Section Formating -------------------- */
+.toggle-bar {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  top: 48px;
+  right: 48px;
+  z-index: 999999;
+}
+
+.sun-wrapper,
+.moon-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text);
+}
+
+.toggle-button {
+  cursor: pointer;
+  position: relative;
+  width: 56px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-pink);
+  border-radius: 999px;
+  margin: 0px 16px;
+  border: none;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.toggle-circle {
+  position: absolute;
+  left: 6px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-background);
+  transition: all 0.2s ease-in-out;
+}
+
+.toggle-button:hover .toggle-circle {
+  transform: scale(0.9);
+}
+
+.slide {
+  left: 28px;
+}
+
+/* Section Formating -------------------- */
 .section-margin {
   height: 3000px;
   width: 100%;
@@ -51,7 +145,7 @@ html, body {
   width: 50%;
   padding: 1000px 4%;
   margin: 0;
-  background-color: var(--primary-color);
+  background-color: var(--color-background);
 }
 
 .left {
@@ -65,7 +159,7 @@ html, body {
 .section-intro-wrapper {
   position: relative;
   padding: 20% 5%;
-  border-bottom: 2px solid var(--primary-pink);
+  border-bottom: 2px solid var(--color-pink);
   padding-bottom: 400px;
 }
 
@@ -79,18 +173,20 @@ html, body {
   font-weight: 700;
   line-height: 1.8;
   margin-top: 64px;
+  color: var(--color-text);
 }
 
 .section-text {
   line-height: 2;
   margin-top: 18px;
   font-size: 16px;
+  color: var(--color-text);
 }
 
 /* Fancy Decoration Part of Section -------------------- */
 .section-title {
   position: relative;
-  color: var(--primary-pink);
+  color: var(--color-pink);
 }
 
 .section-title-text {
@@ -101,6 +197,7 @@ html, body {
   transform: skewY(25deg);
   z-index: 5;
   text-transform: uppercase;
+  color: var(--color-pink);
 }
 
 .styleOne,
@@ -111,7 +208,7 @@ html, body {
   width: 100%;
   max-width: 278px;
   height: 60px;
-  border: 1px solid var(--primary-pink);
+  border: 1px solid var(--color-pink);
   transform-origin: left;
   transform: skewY(-25deg);
 }
@@ -127,14 +224,14 @@ html, body {
 .styleThree {
   top: 80px;
   transform: skewY(25deg);
-  background-color: var(--primary-pink);
+  background-color: var(--color-pink);
 }
 
 .section-number {
   position: absolute;
   bottom: 15px;
   right: 0;
-  color: var(--primary-pink);
+  color: var(--color-pink);
   font-size: 24px;
 }
 
@@ -156,23 +253,28 @@ html, body {
   position: absolute;
   bottom: 368px;
   left: 0;
+  color: var(--color-text);
 }
 
 .hero-second {
   position: absolute;
   top: calc(50% - 120px);
   right: 0;
+  color: var(--color-text);
 }
 
 .hero-main-title {
   font-size: 64px;
+  color: var(--color-text);
 }
 
 .hero-main-description {
   font-size: 18px;
+  color: var(--color-text);
 }
 
 .hero-second-subheading {
   font-size: 32px;
   text-transform: uppercase;
+  color: var(--color-text);
 }
