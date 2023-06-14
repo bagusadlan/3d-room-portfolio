@@ -291,3 +291,15 @@ svg {
 .blue-background {
   background-color: var(--color-blue);
 }
+
+.green-text {
+  color: var(--color-green);
+}
+
+.green-border {
+  border-color: var(--color-green);
+}
+
+.green-background {
+  background-color: var(--color-green);
+}

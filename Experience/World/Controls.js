@@ -19,8 +19,8 @@ export default class Controls {
   }
 
   setPath() {
-    this.timeline = new GSAP.timeline()
-    this.timeline.to(this.room.position, {
+    this.firstMoveTimeline = new GSAP.timeline()
+    this.firstMoveTimeline.to(this.room.position, {
       x: () => {
         return this.sizes.width * 0.0016
       },
@@ -40,6 +40,20 @@ export default class Controls {
       },
       scrollTrigger: {
         trigger: ".second-move",
+        markers: true,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.8,
+        invalidateOnRefresh: true
+      }
+    })
+    this.thirdMoveTimeline = new GSAP.timeline()
+    this.thirdMoveTimeline.to(this.room.position, {
+      x: () => {
+        return this.sizes.width * 0.0016
+      },
+      scrollTrigger: {
+        trigger: ".third-move",
         markers: true,
         start: "top top",
         end: "bottom bottom",
