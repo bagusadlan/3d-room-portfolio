@@ -70,6 +70,21 @@ export default class Controls {
           width: 0.4 * 4,
           height: 0.7 * 4
         }, "same")
+
+        // Third Move ---------------------------------
+        this.thirdMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: ".third-move",
+            markers: true,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.8,
+            invalidateOnRefresh: true
+          }})
+        this.thirdMoveTimeline.to(this.camera.orthographicCamera.position, {
+          y: -1,
+          x: -4
+        })
       },
       // Mobile
       "(max-width: 960px)": () => {
@@ -78,20 +93,6 @@ export default class Controls {
       // all 
       "all": function() {
 
-      }
-    })
-    this.thirdMoveTimeline = new GSAP.timeline()
-    this.thirdMoveTimeline.to(this.room.position, {
-      x: () => {
-        return this.sizes.width * 0.0016
-      },
-      scrollTrigger: {
-        trigger: ".third-move",
-        markers: true,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.8,
-        invalidateOnRefresh: true
       }
     })
   }
