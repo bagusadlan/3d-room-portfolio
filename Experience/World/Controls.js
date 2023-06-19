@@ -15,36 +15,60 @@ export default class Controls {
     this.room = this.experience.world.room.actualRoom
     GSAP.registerPlugin(ScrollTrigger)
 
-    this.setPath()
+    this.setScrollTrigger()
   }
 
-  setPath() {
-    this.firstMoveTimeline = new GSAP.timeline()
-    this.firstMoveTimeline.to(this.room.position, {
-      x: () => {
-        return this.sizes.width * 0.0016
+  setScrollTrigger() {
+    ScrollTrigger.matchMedia({
+      // Dekstop
+      "(min-width: 969px)": () => {
+        // First Move ---------------------------------
+        this.firstMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: ".first-move",
+            markers: true,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.8,
+            invalidateOnRefresh: true
+          }})
+        this.firstMoveTimeline.to(this.room.position, {
+          x: () => {
+            return this.sizes.width * 0.0016
+          },
+        })
+
+        // Second Move ---------------------------------
+        this.secondMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: ".second-move",
+            markers: true,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }})
+        this.secondMoveTimeline.to(this.room.position, {
+          x: () => {
+            return 1
+          },
+          z: () => {
+            return this.sizes.height * 0.0032
+          }
+        }, "same")
+        this.secondMoveTimeline.to(this.room.scale, {
+          x: 0.4,
+          y: 0.4,
+          z: 0.4
+        }, "same")
       },
-      scrollTrigger: {
-        trigger: ".first-move",
-        markers: true,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.8,
-        invalidateOnRefresh: true
-      }
-    })
-    this.secondMoveTimeline = new GSAP.timeline()
-    this.secondMoveTimeline.to(this.room.position, {
-      x: () => {
-        return -this.sizes.width * 0.0016
+      // Mobile
+      "(max-width: 960px)": () => {
+        
       },
-      scrollTrigger: {
-        trigger: ".second-move",
-        markers: true,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.8,
-        invalidateOnRefresh: true
+      // all 
+      "all": function() {
+
       }
     })
     this.thirdMoveTimeline = new GSAP.timeline()
