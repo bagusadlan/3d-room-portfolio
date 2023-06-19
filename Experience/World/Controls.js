@@ -37,11 +37,11 @@ export default class Controls {
             scrub: 0.8,
             invalidateOnRefresh: true
           }})
-        this.firstMoveTimeline.to(this.room.position, {
-          x: () => {
-            return this.sizes.width * 0.0016
-          },
-        })
+          .to(this.room.position, {
+            x: () => {
+              return this.sizes.width * 0.0016
+            },
+          })
 
         // Second Move ---------------------------------
         this.secondMoveTimeline = new GSAP.timeline({
@@ -53,23 +53,23 @@ export default class Controls {
             scrub: 0.6,
             invalidateOnRefresh: true
           }})
-        this.secondMoveTimeline.to(this.room.position, {
-          x: () => {
-            return 1
-          },
-          z: () => {
-            return this.sizes.height * 0.0032
-          }
-        }, "same")
-        this.secondMoveTimeline.to(this.room.scale, {
-          x: 0.4,
-          y: 0.4,
-          z: 0.4
-        }, "same")
-        this.secondMoveTimeline.to(this.rectLight, {
-          width: 0.4 * 4,
-          height: 0.7 * 4
-        }, "same")
+          .to(this.room.position, {
+            x: () => {
+              return 1
+            },
+            z: () => {
+              return this.sizes.height * 0.0032
+            }
+          }, "same")
+          .to(this.room.scale, {
+            x: 0.4,
+            y: 0.4,
+            z: 0.4
+          }, "same")
+          .to(this.rectLight, {
+            width: 0.4 * 4,
+            height: 0.7 * 4
+          }, "same")
 
         // Third Move ---------------------------------
         this.thirdMoveTimeline = new GSAP.timeline({
@@ -81,10 +81,10 @@ export default class Controls {
             scrub: 0.8,
             invalidateOnRefresh: true
           }})
-        this.thirdMoveTimeline.to(this.camera.orthographicCamera.position, {
-          y: -1,
-          x: -4
-        })
+          .to(this.camera.orthographicCamera.position, {
+            y: -1,
+            x: -4
+          })
       },
       // Mobile
       "(max-width: 960px)": () => {
