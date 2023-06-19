@@ -27,6 +27,9 @@ export default class Controls {
     ScrollTrigger.matchMedia({
       // Dekstop
       "(min-width: 969px)": () => {
+        this.room.scale.set(0.11, 0.11, 0.11)
+        this.rectLight.width = 0.4
+        this.rectLight.height = 0.7
         // First Move ---------------------------------
         this.firstMoveTimeline = new GSAP.timeline({
           scrollTrigger: {
@@ -88,7 +91,67 @@ export default class Controls {
       },
       // Mobile
       "(max-width: 960px)": () => {
+        this.room.scale.set(0.07, 0.07, 0.07)
+        this.room.position.set(0, 0, 0)
+        this.rectLight.width = 0.3
+        this.rectLight.height = 0.4
         
+        // First Move ---------------------------------
+        this.firstMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: ".first-move",
+            markers: true,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.8,
+            invalidateOnRefresh: true
+          }})
+          .to(this.room.scale, {
+            x: 0.1,
+            y: 0.1,
+            z: 0.1,
+          }, "same")
+          .to(this.rectLight, {
+            width: 0.3 * 1.35,
+            height: 0.4 * 1.35,
+          }, "same")
+
+        // Second Move ---------------------------------
+        this.secondMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: ".second-move",
+            markers: true,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.6,
+            invalidateOnRefresh: true
+          }})
+          .to(this.room.scale, {
+            x: 0.25,
+            y: 0.25,
+            z: 0.25,
+          }, "same")
+          .to(this.rectLight, {
+            width: 0.3 * 3,
+            height: 0.4 * 3,
+          }, "same")
+          .to(this.room.position, {
+            x: 1.8
+          }, "same")
+
+        // Third Move ---------------------------------
+        this.thirdMoveTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: ".third-move",
+            markers: true,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.8,
+            invalidateOnRefresh: true
+          }})
+          .to(this.room.position, {
+            z: -4.5
+          })
       },
       // all 
       "all": function() {
