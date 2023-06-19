@@ -34,7 +34,6 @@ export default class Controls {
         this.firstMoveTimeline = new GSAP.timeline({
           scrollTrigger: {
             trigger: ".first-move",
-            markers: true,
             start: "top top",
             end: "bottom bottom",
             scrub: 0.8,
@@ -50,7 +49,6 @@ export default class Controls {
         this.secondMoveTimeline = new GSAP.timeline({
           scrollTrigger: {
             trigger: ".second-move",
-            markers: true,
             start: "top top",
             end: "bottom bottom",
             scrub: 0.6,
@@ -78,7 +76,6 @@ export default class Controls {
         this.thirdMoveTimeline = new GSAP.timeline({
           scrollTrigger: {
             trigger: ".third-move",
-            markers: true,
             start: "top top",
             end: "bottom bottom",
             scrub: 0.8,
@@ -100,7 +97,6 @@ export default class Controls {
         this.firstMoveTimeline = new GSAP.timeline({
           scrollTrigger: {
             trigger: ".first-move",
-            markers: true,
             start: "top top",
             end: "bottom bottom",
             scrub: 0.8,
@@ -120,7 +116,6 @@ export default class Controls {
         this.secondMoveTimeline = new GSAP.timeline({
           scrollTrigger: {
             trigger: ".second-move",
-            markers: true,
             start: "top top",
             end: "bottom bottom",
             scrub: 0.6,
@@ -143,7 +138,6 @@ export default class Controls {
         this.thirdMoveTimeline = new GSAP.timeline({
           scrollTrigger: {
             trigger: ".third-move",
-            markers: true,
             start: "top top",
             end: "bottom bottom",
             scrub: 0.8,
