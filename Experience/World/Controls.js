@@ -13,6 +13,11 @@ export default class Controls {
     this.time = this.experience.time
     this.camera = this.experience.camera
     this.room = this.experience.world.room.actualRoom
+    this.room.children.forEach(child => {
+      if (child.type === "RectAreaLight") {
+        this.rectLight = child
+      }
+    })
     GSAP.registerPlugin(ScrollTrigger)
 
     this.setScrollTrigger()
@@ -60,6 +65,10 @@ export default class Controls {
           x: 0.4,
           y: 0.4,
           z: 0.4
+        }, "same")
+        this.secondMoveTimeline.to(this.rectLight, {
+          width: 0.4 * 4,
+          height: 0.7 * 4
         }, "same")
       },
       // Mobile
