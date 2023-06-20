@@ -148,8 +148,70 @@ export default class Controls {
           })
       },
       // all 
-      "all": function() {
+      "all": () => {
+        // Third Move ---------------------------------
+        this.secondPartTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: ".third-move",
+            start: "center center"
+          }
+        })
 
+        this.room.children.forEach(child => {
+          if (child.name === "Mini_Floor") {
+            this.miniFloorAnimation = new GSAP.to(child.position, {
+              x: -6.46751,
+              z: 11.8908,
+              duration: 0.4
+            })
+          }
+
+          if (child.name === "Mailbox") {
+            this.mailboxAnimation = new GSAP.to(child.scale, {
+              x: 1,
+              y: 1,
+              z: 1,
+              ease: "back.out(1.7)",
+              duration: 0.4
+            })
+          }
+
+          if (child.name === "Lamp") {
+            this.lampAnimation = new GSAP.to(child.scale, {
+              x: 1,
+              y: 1,
+              z: 1,
+              ease: "back.out(1.7)",
+              duration: 0.4
+            })
+          }
+
+          if (child.name === "Flower1") {
+            this.flowerOneAnimation = new GSAP.to(child.scale, {
+              x: 1,
+              y: 1,
+              z: 1,
+              ease: "back.out(1.7)",
+              duration: 0.4
+            })
+          }
+
+          if (child.name === "Flower2") {
+            this.flowerTwoAnimation = new GSAP.to(child.scale, {
+              x: 1,
+              y: 1,
+              z: 1,
+              ease: "back.out(1.7)",
+              duration: 0.4
+            })
+          }
+
+        })
+        this.secondPartTimeline.add(this.miniFloorAnimation)
+        this.secondPartTimeline.add(this.mailboxAnimation)
+        this.secondPartTimeline.add(this.lampAnimation)
+        this.secondPartTimeline.add(this.flowerOneAnimation)
+        this.secondPartTimeline.add(this.flowerTwoAnimation)
       }
     })
   }
