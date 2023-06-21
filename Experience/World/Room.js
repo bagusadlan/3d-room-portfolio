@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import GSAP from "gsap"
+import { CustomEase } from "gsap/CustomEase"
 import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js'
 
 import Experience from "../Experience";
@@ -12,7 +13,10 @@ export default class Room {
     this.time = this.experience.time
     this.room = this.resources.items.room
     this.actualRoom = this.room.scene
-    
+    GSAP.registerPlugin(CustomEase)
+
+    this.lampControl = GSAP.timeline()
+
     this.lerp = {
       current: 0,
       target: 0,
@@ -51,6 +55,18 @@ export default class Room {
           map: this.resources.items.screen
         })
       }
+
+      if (child.name === "Mini_Floor") {
+        child.position.x = -0.932838
+        child.position.z = 6.35613
+      }
+
+      if (child.name === "Mailbox" ||
+      child.name === "Lamp" ||
+      child.name === "Flower1" ||
+      child.name === "Flower2") {
+        child.scale.set(0, 0, 0)
+      }
     })
 
     this.scene.add(this.actualRoom)
@@ -85,12 +101,13 @@ export default class Room {
 
   turnOnTheLight(theme) {
     if (theme === "dark") {
-      setTimeout(() => {
-        // this.rectLight.intensity = 20
-        GSAP.to(this.rectLight, { intensity: 40, duration: 1 })
-      }, 1500)
+      this.lampControl.fromTo(this.rectLight, {intensity: 0}, {
+        intensity: 40,
+        duration: 2,
+        ease: CustomEase.create("custom", "M0,0,C0.054,0.164,0.064,0.552,0.064,0.552,0.064,0.552,0.128,0,0.128,0,0.128,0,0.182,0.762,0.182,0.762,0.182,0.762,0.266,0,0.266,0,0.266,0,0.358,1,0.358,1,0.358,1,0.464,0,0.464,0,0.464,0,0.56,0.724,0.56,0.724,0.56,0.724,0.636,0,0.636,0,0.636,0,0.754,0.574,0.754,0.574,0.754,0.574,0.838,0,0.838,0,0.838,0,0.958,0,0.958,0,0.958,0,0.995,1.001,1,1"),
+      })
     } else {
-      this.rectLight.intensity = 0
+      this.lampControl.progress(0).clear()
     }
   }
 
