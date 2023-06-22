@@ -193,6 +193,20 @@ export default class Controls {
               }
             })
           }
+          GSAP.from(
+            this.progressBar,
+            {
+              scaleY: 0,
+              scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 0.4,
+                pin: this.progressWrapper,
+                pinSpacing: false
+              }
+            }
+          )
         })
         
         // Third Move ---------------------------------
