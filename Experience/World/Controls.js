@@ -1,6 +1,7 @@
 import * as THREE from 'three'
-import GSAP from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger.js'
+import GSAP from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Lenis from '@studio-freight/lenis'
 
 import Experience from "../Experience";
 
@@ -21,6 +22,21 @@ export default class Controls {
     GSAP.registerPlugin(ScrollTrigger)
 
     this.setScrollTrigger()
+    this.setSmoothScroll()
+  }
+  
+  /**
+   * Set up smooth scroll using other library
+   */
+  setSmoothScroll() {
+    const lenis = new Lenis()
+
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
   }
 
   setScrollTrigger() {
