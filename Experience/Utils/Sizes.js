@@ -6,7 +6,7 @@ export default class Sizes extends EventEmitter {
     this.width = window.innerWidth
     this.height = window.innerHeight
     this.aspect = this.width / this.height
-    this.pixelRation = Math.min(window.devicePixelRatio, 2)
+    this.pixelRatio = Math.min(window.devicePixelRatio, 2)
     this.frustrum = 5
 
     this.setDevice()
@@ -15,7 +15,7 @@ export default class Sizes extends EventEmitter {
       this.width = window.innerWidth
       this.height = window.innerHeight
       this.aspect = this.width / this.height
-      this.pixelRation = Math.min(window.devicePixelRatio, 2)
+      this.pixelRatio = Math.min(window.devicePixelRatio, 2)
       this.emit('resize')
 
       if (this.width < 968 && this.device !== 'mobile') {
@@ -26,7 +26,6 @@ export default class Sizes extends EventEmitter {
         this.emit('switchdevice', this.device)
       }
     })
-    // console.log(this.device);
   }
 
   setDevice() {
