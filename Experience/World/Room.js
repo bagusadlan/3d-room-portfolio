@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import GSAP from "gsap"
 import { CustomEase } from "gsap/CustomEase"
-import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js'
+// import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js'
 
 import Experience from "../Experience";
 
@@ -13,6 +13,7 @@ export default class Room {
     this.time = this.experience.time
     this.room = this.resources.items.room
     this.actualRoom = this.room.scene
+    this.roomChildren = {}
     GSAP.registerPlugin(CustomEase)
 
     this.lampControl = GSAP.timeline()
@@ -75,6 +76,8 @@ export default class Room {
         child.position.set(0, -1.5, 0)
         child.rotation.y = Math.PI / 4
       }
+
+      this.roomChildren[child.name.toLowerCase()] = child
     })
 
     this.scene.add(this.actualRoom)
@@ -105,6 +108,8 @@ export default class Room {
     // const rectLightHelper = new RectAreaLightHelper( rectLight )
     // rectLight.add( rectLightHelper )
     this.scene.add(this.actualRoom)
+
+    this.roomChildren['rectlight'] = this.rectLight
   }
 
   turnOnTheLight(theme) {
