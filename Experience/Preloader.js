@@ -1,5 +1,5 @@
-// import Experience from './Experience'
 import { EventEmitter } from 'events'
+import Experience from './Experience'
 
 export default class Preloader extends EventEmitter {
   constructor() {
@@ -9,5 +9,14 @@ export default class Preloader extends EventEmitter {
     this.scene = this.experience.scene
     this.canvas = this.experience.canvas
     this.camera = this.experience.camera
+    this.world = this.experience.world
+
+    this.world.on('worldready', () => {
+      this.playIntro()
+    })
+  }
+
+  playIntro() {
+      
   }
 }
