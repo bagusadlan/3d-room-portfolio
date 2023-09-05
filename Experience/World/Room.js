@@ -61,11 +61,19 @@ export default class Room {
         child.position.z = 6.35613
       }
 
-      if (child.name === "Mailbox" ||
-      child.name === "Lamp" ||
-      child.name === "Flower1" ||
-      child.name === "Flower2") {
-        child.scale.set(0, 0, 0)
+      // if (child.name === "Mailbox" ||
+      // child.name === "Lamp" ||
+      // child.name === "Flower1" ||
+      // child.name === "Flower2") {
+      //   child.scale.set(0, 0, 0)
+      // }
+
+      child.scale.set(0, 0, 0)
+
+      if (child.name === 'Cube') {
+        child.scale.set(1, 1, 1)
+        child.position.set(0, -1.5, 0)
+        child.rotation.y = Math.PI / 4
       }
     })
 
