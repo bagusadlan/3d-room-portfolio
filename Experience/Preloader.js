@@ -31,14 +31,30 @@ export default class Preloader extends EventEmitter {
   async playIntro() {
     await this.firstIntro()
     this.scrollOnceEvent = this.onScroll.bind(this)
+    this.touchStart = this.onTouch.bind(this)
+    this.touchMove = this.onTouchMove.bind(this)
+    console.log(this);
     window.addEventListener('wheel', this.scrollOnceEvent)
+    window.addEventListener('touchstart', this.touchStart)
+    window.addEventListener('touchmove', this.touchMove)
   }
 
   onScroll(e) {
     if (e.deltaY > 0) {
+      console.log(e);
       this.playSecondIntro()
       window.removeEventListener('wheel', this.scrollOnceEvent)
     }
+  }
+
+  onTouch(e) {
+    console.log(e);
+    console.log('onTouch');
+    this.deltaY = e.deltaY
+  }
+
+  onTouchMove() {
+
   }
 
   firstIntro() {
@@ -111,30 +127,33 @@ export default class Preloader extends EventEmitter {
             y: 8.5618,
             z: 1.3243
           }, 'same')
-          .to(this.roomChildren.cube.scale, {
-            x: 0,
-            y: 0,
-            z: 0,
-          })
           .to(this.roomChildren.body.scale, {
             x: 1,
             y: 1,
             z: 1,
           })
+          .to(this.roomChildren.cube.scale, {
+            x: 0,
+            y: 0,
+            z: 0,
+          })
           .to(this.roomChildren.desks.scale, {
             x: 1,
             y: 1,
             z: 1,
+            duration: 0.5
           })
           .to(this.roomChildren.aquarium.scale, {
             x: 1,
             y: 1,
             z: 1,
+            duration: 0.5
           })
           .to(this.roomChildren.fish.scale, {
             x: 1,
             y: 1,
             z: 1,
+            duration: 0.5
           })
           .to(this.roomChildren.chair.scale, {
             x: 1,
@@ -142,22 +161,25 @@ export default class Preloader extends EventEmitter {
             z: 1,
           }, 'chair')
           .to(this.roomChildren.chair.rotation, {
-            y: 2 * Math.PI + Math.PI / 2,
+            y: 4 * Math.PI + Math.PI / 2,
           }, 'chair')
           .to(this.roomChildren.clock.scale, {
             x: 1,
             y: 1,
             z: 1,
+            duration: 0.5
           })
           .to(this.roomChildren.table_stuff.scale, {
             x: 1,
             y: 1,
             z: 1,
+            duration: 0.5
           })
           .to(this.roomChildren.computer.scale, {
             x: 1,
             y: 1,
             z: 1,
+            duration: 0.5
           })
           .to(this.roomChildren.floor_items.scale, {
             x: 1,
@@ -168,16 +190,18 @@ export default class Preloader extends EventEmitter {
             x: 1,
             y: 1,
             z: 1,
+            duration: 0.5
           })
-         .to(this.roomChildren.rectlight.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-         })
+        //  .to(this.roomChildren.rectlight.scale, {
+        //   x: 1,
+        //   y: 1,
+        //   z: 1,
+        //  })
         .to(this.roomChildren.shelves.scale, {
           x: 1,
           y: 1,
           z: 1,
+          duration: 0.5
         })
       } else {
         this.secondTimeline
