@@ -69,6 +69,14 @@ export default class Room {
         child.scale.set(0, 0, 0)
       }
 
+      child.scale.set(0, 0, 0)
+
+      if (child.name === 'Cube') {
+        child.scale.set(1, 1, 1)
+        child.position.set(0, -1.5, 0)
+        child.rotation.y = Math.PI / 4
+      }
+
       this.roomChildren[child.name.toLowerCase()] = child
     })
 
@@ -95,6 +103,7 @@ export default class Room {
     this.rectLight.position.set(8.53993, 6.39, -1.50045)
     this.rectLight.rotation.x = -Math.PI / 2
     this.rectLight.rotation.z = Math.PI / 4
+
     this.actualRoom.add(this.rectLight)
 
     // const rectLightHelper = new RectAreaLightHelper( rectLight )

@@ -4,9 +4,14 @@ export default [
     type: "glbModel",
     path: "/models/FinalVersion4.glb"
   },
+  // {
+  //   name: "screen",
+  //   type: "texture",
+  //   path: "/textures/Untitled.jpg"
+  // },
   {
     name: "screen",
     type: "videoTexture",
-    path: "/textures/video.mp4"
+    path: "/textures/768.mp4"
   },
 ]

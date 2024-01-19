@@ -1,14 +1,15 @@
-import * as THREE from 'three'
+import { EventEmitter } from 'events'
 
-import Experience from "../Experience";
+import Experience from '../Experience'
 
-import Room from './Room';
-import Floor from './Floor';
-import Controls from './Controls';
-import Environment from "../World/Environment";
+import Room from './Room'
+import Floor from './Floor'
+import Environment from '../World/Environment'
 
-export default class World {
+export default class World extends EventEmitter {
   constructor() {
+    super()
+
     this.experience = new Experience()
     this.sizes = this.experience.sizes
     this.scene = this.experience.scene
@@ -16,16 +17,15 @@ export default class World {
     this.camera = this.experience.camera
     this.resources = this.experience.resources
     this.theme = this.experience.theme
-    this.room = this.experience.room
 
     this.resources.on('ready', () => {
       this.environment = new Environment()
       this.floor = new Floor()
       this.room = new Room()
-      this.controls = new Controls()
+      this.emit('worldready')
     })
 
-    this.theme.on("switch", (theme) => {
+    this.theme.on('switch', (theme) => {
       this.switchTheme(theme)
     })
   }
@@ -39,9 +39,7 @@ export default class World {
     }
   }
 
-  resize() {
-
-  }
+  resize() {}
 
   update() {
     if (this.room) {

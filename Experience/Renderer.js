@@ -19,19 +19,21 @@ export default class Renderer {
       antialias: true
     })
 
-    this.renderer.useLegacyLights =  true
+    // this.renderer.useLegacyLights =  true
+    // this.renderer.physicallyCorrectLights =  true
+    this.renderer.physicallyBasedLights =  true
     this.renderer.outputColorSpace = THREE.LinearSRGBColorSpace
     this.renderer.toneMapping = THREE.CineonToneMapping
     this.renderer.toneMappingExposure = 1.75
     this.renderer.shadowMap.enabled = true
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
     this.renderer.setSize(this.sizes.width, this.sizes.height)
-    this.renderer.setPixelRatio(this.sizes.pixelRation)
+    this.renderer.setPixelRatio(this.sizes.pixelRatio)
   }
 
   resize() {
     this.renderer.setSize(this.sizes.width, this.sizes.height)
-    this.renderer.setPixelRatio(this.sizes.pixelRation)
+    this.renderer.setPixelRatio(this.sizes.pixelRatio)
   }
 
   update() {

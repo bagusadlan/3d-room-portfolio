@@ -8,6 +8,7 @@
 
 html, body {
   font-family: "Monstserrat", sans-serif;
+  /* overflow: hidden; */
   /* color: var(--color-text); */
 }
 
@@ -58,6 +59,10 @@ svg {
   --container-color: hsl(19, 10%, 10%);
 } */
 
+.hidden {
+  display: none;
+}
+
 /* Experience -------------------------------- */
 .experience {
   position: fixed;
@@ -70,11 +75,66 @@ svg {
   height: 100%;
 }
 
+/* Preloader load ---------------------------- */
+.preloader {
+  opacity: 1;
+  height: 100dvh;
+  width: 100vw;
+  background-color: var(--color-background-light);
+  position: fixed;
+  opacity: 1;
+  z-index: 99999999;
+}
+
+.preloader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.loading {
+  display: flex;
+  gap: 8px;
+}
+
+.preloader-circle {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: var(--color-pink-light);
+  animation: load 1s ease-in-out infinite;
+}
+
+.preloader-circle:nth-child(2) {
+  animation-delay: .1s;
+}
+
+.preloader-circle:nth-child(3) {
+  animation-delay: .2s;
+}
+
+@keyframes load {
+  0% {
+    transform: translateY(0);
+  }
+
+  20% {
+    transform: translateY(-10px);
+  }
+
+  40% {
+    transform: translateY(0);
+  }
+}
+
+
 /* Page ---------------------------- */
 .page {
   z-index: 99999;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -82,8 +142,48 @@ svg {
   position: relative;
 }
 
+/* Preloader Stuff ---------------------------- */
+.animatedis {
+  display: inline-block;
+  transform: translateY(100%);
+}
+
+.intro-text {
+  display: flex;
+  color: var(--color-text);
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 500;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.intro-click {
+  opacity: 0;
+  color: var(--color-text);
+  font-size: 14px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  animation: bounce 0.4s ease-in alternate infinite;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translate(-50%, 0);
+  }
+  
+  100% {
+    transform: translate(-50%, 5px);
+  }
+}
+
 /* Section Formating -------------------- */
 .toggle-bar {
+  opacity: 0;
   position: fixed;
   display: flex;
   flex-direction: row;
@@ -347,5 +447,27 @@ svg {
   .progress-bar-wrapper-left {
     right: 0;
     left: auto;
+  }
+
+  .hero-main {
+    bottom: 120px;
+  }
+
+  .hero-second {
+    top: 120px;
+  }
+
+  .hero-wrapper {
+    width: calc(100% - 60px);
+  }
+
+  .hero-main-title {
+    font-size: 32px;
+  }
+
+  .hero-main-description,
+  .hero-second-subheading
+  {
+    font-size: 18px;
   }
 }
