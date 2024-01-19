@@ -35,6 +35,12 @@ export default class Resources extends EventEmitter {
         this.loaders.gltfLoader.load(asset.path, file => {
           this.singleAssetLoaded(asset, file)
         })
+      // } else if (asset.type === 'texture') {
+      //   this.image = {}
+      //   this.texture = {}
+      //   this.texture[asset.name] = new THREE.TextureLoader().load(asset.path)
+      //   this.singleAssetLoaded(asset, this.texture[asset.name])
+      // }
       } else if (asset.type === 'videoTexture') {
         this.video = {}
         this.videoTexture = {}
@@ -45,7 +51,7 @@ export default class Resources extends EventEmitter {
         this.video[asset.name].autoplay = true
         this.video[asset.name].muted = true
         this.video[asset.name].loop = true
-        this.video[asset.name].play()
+        // this.video[asset.name].play()
 
         this.videoTexture[asset.name] = new THREE.VideoTexture(
           this.video[asset.name]
