@@ -2,8 +2,9 @@ import * as THREE from 'three'
 import GSAP from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from '@studio-freight/lenis'
+import ASScroll from '@ashthornton/asscroll'
 
-import Experience from "../Experience";
+import Experience from "./Experience";
 
 export default class Controls {
   constructor() {
@@ -11,6 +12,7 @@ export default class Controls {
     this.scene = this.experience.scene
     this.sizes = this.experience.sizes
     this.resources = this.experience.resources
+    this.computerVideo = this.resources.items.screen.source.data
     this.time = this.experience.time
     this.camera = this.experience.camera
     this.room = this.experience.world.room.actualRoom
@@ -26,22 +28,93 @@ export default class Controls {
 
     GSAP.registerPlugin(ScrollTrigger)
 
-    this.setScrollTrigger()
+    document.querySelector('.page').style.overflow = 'visible'
+    
+    this.setEventListener()
     this.setSmoothScroll()
+    this.setScrollTrigger()
+  }
+
+  setupASScroll() {
+      // https://github.com/ashthornton/asscroll
+      const asscroll = new ASScroll({
+          ease: 0.1,
+          disableRaf: true,
+      });
+
+      GSAP.ticker.add(asscroll.update);
+
+      ScrollTrigger.defaults({
+          scroller: asscroll.containerElement,
+      });
+
+      ScrollTrigger.scrollerProxy(asscroll.containerElement, {
+          scrollTop(value) {
+              if (arguments.length) {
+                  asscroll.currentPos = value;
+                  return;
+              }
+              return asscroll.currentPos;
+          },
+          getBoundingClientRect() {
+              return {
+                  top: 0,
+                  left: 0,
+                  width: window.innerWidth,
+                  height: window.innerHeight,
+              };
+          },
+          fixedMarkers: true,
+      });
+
+      asscroll.on("update", ScrollTrigger.update);
+      ScrollTrigger.addEventListener("refresh", asscroll.resize);
+
+      requestAnimationFrame(() => {
+          asscroll.enable({
+              newScrollElements: document.querySelectorAll(
+                  ".gsap-marker-start, .gsap-marker-end, [asscroll]"
+              ),
+          });
+      });
+      return asscroll;
+  }
+
+  setSmoothScroll() {
+      this.asscroll = this.setupASScroll();
   }
   
   /**
    * Set up smooth scroll using other library
    */
-  setSmoothScroll() {
-    const lenis = new Lenis()
+  // setSmoothScroll() {
+  //   const lenis = new Lenis()
 
-    function raf(time) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
+  //   function raf(time) {
+  //     lenis.raf(time)
+  //     requestAnimationFrame(raf)
+  //   }
 
-    requestAnimationFrame(raf)
+  //   requestAnimationFrame(raf)
+  // }
+
+  setEventListener() {
+    this.userInteraction = this.handleUserInteraction.bind(this)
+    window.addEventListener('click', this.userInteraction);
+    // window.addEventListener('touchstart', this.userInteraction);
+  }
+  
+
+  handleUserInteraction() {
+    // Mulai video jika belum dimulai
+    // if (this.computerVideo.paused) {
+      this.computerVideo.muted = false;
+      
+      // Hapus event listener setelah interaksi pertama
+      window.removeEventListener('click', this.userInteraction);
+      // window.removeEventListener('touchstart', this.userInteraction);
+    // }
+    console.log(this.computerVideo.muted);
   }
 
   setScrollTrigger() {
@@ -231,6 +304,29 @@ export default class Controls {
         })
 
         // All animations ---------------------------------
+        // Play Video ---------------------------------
+        this.playVideoTimeline = new GSAP.timeline({
+          scrollTrigger: {
+            trigger: ".play-video",
+            start: "top top",
+            end: "bottom top",
+            // scrub: 0.6,
+            invalidateOnRefresh: true,
+            // onEnter: () => this.computerVideo.play(),
+            // onEnterBack: () => this.computerVideo.play(),
+            // onLeave: () => this.computerVideo.pause(),
+            // onLeaveBack: () => this.computerVideo.pause(),
+            onToggle: (self) => {
+              if (self.isActive) {
+                this.computerVideo.play();
+                // this.computerVideo.muted = false;
+              } else {
+                this.computerVideo.pause();
+              }
+            }
+          }
+        })
+
         // First Move ---------------------------------
         this.firstMoveTimeline = new GSAP.timeline({
           scrollTrigger: {
@@ -254,7 +350,19 @@ export default class Controls {
             start: "top top",
             end: "bottom bottom",
             scrub: 0.6,
-            invalidateOnRefresh: true
+            invalidateOnRefresh: true,
+            // onEnter: () => this.computerVideo.play(),
+            // onEnterBack: () => this.computerVideo.play(),
+            // onLeave: () => this.computerVideo.pause(),
+            // onLeaveBack: () => this.computerVideo.pause(),
+            // onToggle: (self) => {
+            //   if (self.isActive) {
+            //     this.computerVideo.play();
+            //     // this.computerVideo.muted = false;
+            //   } else {
+            //     this.computerVideo.pause();
+            //   }
+            // }
           }
         })
           .to(this.circleSecond.scale, {
@@ -340,8 +448,8 @@ export default class Controls {
               duration: 0.4
             })
           }
-
         })
+
         this.secondPartTimeline.add(this.miniFloorAnimation)
         this.secondPartTimeline.add(this.mailboxAnimation)
         this.secondPartTimeline.add(this.lampAnimation)
