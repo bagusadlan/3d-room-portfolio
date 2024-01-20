@@ -8,5 +8,5 @@ export default (element) => {
     })
     .join('')
 
-    return element
+  return element
 }
