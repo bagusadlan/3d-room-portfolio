@@ -2,6 +2,10 @@ import { EventEmitter } from 'events'
 import Experience from './Experience'
 import GSAP from 'gsap'
 import convert from './Utils/convertDivsToSpans'
+import {
+  convertNodeToSpans as convertNode,
+  giveClassNameToSpans as addAnimation
+} from './Utils/convertNodeToSpans'
 
 export default class Preloader extends EventEmitter {
   constructor() {
@@ -32,7 +36,8 @@ export default class Preloader extends EventEmitter {
   }
 
   setAssets() {
-    convert(document.querySelector('.intro-text'))
+    convertNode(document.querySelectorAll('.intro-appear-first'))
+    addAnimation(document.querySelectorAll('.intro-hidden-first'))
     convert(document.querySelector('.hero-main-title'))
     convert(document.querySelector('.hero-main-description'))
     convert(document.querySelector('.hero-second-subheading'))
@@ -47,6 +52,10 @@ export default class Preloader extends EventEmitter {
       this.timeline.set('.animatedis', {
         y: 0,
         yPercent: 100
+      })
+      this.timeline.set('.intro-hidden-first .animate-second', {
+        y: 0,
+        yPercent: -100
       })
       this.timeline.to('.preloader', {
         opacity: 0,
@@ -76,7 +85,6 @@ export default class Preloader extends EventEmitter {
             y: 1.4,
             z: 1.4,
             ease: 'back.out(2.5)'
-            // duration: 3
           })
           .to(this.room.position, {
             z: -1,
@@ -85,16 +93,16 @@ export default class Preloader extends EventEmitter {
           })
       }
       this.timeline
-        .to('.intro-text .animatedis', {
+        .to('.intro-appear-first .animatedis', {
           yPercent: 0,
           stagger: 0.04,
-          ease: 'back-out(2.5)'
+          ease: 'back.out(2.5)'
         })
         .to(
           '.toggle-bar',
           {
             opacity: 1,
-            ease: 'back-out(2.5)'
+            ease: 'back.out(2.5)'
           },
           'navigation'
         )
@@ -102,7 +110,6 @@ export default class Preloader extends EventEmitter {
           '.intro-click',
           {
             opacity: 1,
-            ease: 'back-out(2.5)',
             onComplete: resolve
           },
           'navigation'
@@ -111,27 +118,83 @@ export default class Preloader extends EventEmitter {
   }
 
   secondIntro() {
+    let introTextUnit = document.querySelectorAll('.intro-hidden-first')
+
     return new Promise((resolve) => {
+      let introAppearFirst = document.querySelectorAll('.intro-appear-first')
+
+      introAppearFirst.forEach((element) => {
+        element.style.overflow = 'visible'
+      })
+
       this.secondTimeline = new GSAP.timeline()
 
-      // if (this.device === 'desktop') {
       this.secondTimeline
         .to('.intro-click', {
-          opacity: 0,
-          ease: 'back-out(2.5)'
+          opacity: 0
         })
-        .to('.intro-text .animatedis', {
+        .to('.intro-appear-firstTwo .animatedis', {
+          x: 50.47,
+          ease: 'power1.out',
+          onComplete: () => {
+            let localTimeline = new GSAP.timeline()
+
+            introTextUnit.forEach((element) => {
+              localTimeline.to(
+                element,
+                {
+                  duration: 0,
+                  display: 'table-cell'
+                },
+                'text-shift'
+              )
+            })
+
+            localTimeline
+              .to(
+                '.intro-appear-firstTwo',
+                {
+                  x: -50.47,
+                  duration: 0
+                },
+                'text-shift'
+              )
+              .to(
+                '.intro-text',
+                {
+                  x: 7.5,
+                  duration: 0
+                },
+                'text-shift'
+              )
+          }
+        })
+
+      this.secondTimeline
+        .to('.intro-hidden-first .animate-second', {
+          delay: 0.3,
+          yPercent: 0,
+          stagger: 0.04,
+          ease: 'back.out(2.5)'
+        })
+        .to('.intro-hidden-first .animate-second', {
+          yPercent: 0,
+          stagger: 0.04,
+          ease: 'back.out(2.5)'
+        })
+
+      this.secondTimeline
+        .to('.intro-text .animateall', {
           yPercent: 100,
           stagger: 0.04,
-          ease: 'back-out(1.7)'
+          ease: 'back.in(2.5)'
         })
         .to(
           this.roomChildren.cube.scale,
           {
             x: 10,
             y: 10,
-            z: 10,
-            ease: 'back.out(2.5)'
+            z: 10
           },
           'same'
         )
@@ -140,8 +203,7 @@ export default class Preloader extends EventEmitter {
           {
             x: 0,
             y: 0,
-            z: 0,
-            ease: 'power1.out'
+            z: 0
           },
           'same'
         )
@@ -183,7 +245,7 @@ export default class Preloader extends EventEmitter {
           {
             yPercent: 0,
             stagger: 0.04,
-            ease: 'back-out(2.5)'
+            ease: 'back.out(1.8)'
           },
           'intro-text'
         )
@@ -192,7 +254,7 @@ export default class Preloader extends EventEmitter {
           {
             yPercent: 0,
             stagger: 0.04,
-            ease: 'back-out(2.5)'
+            ease: 'back.out(1.8)'
           },
           'intro-text'
         )
@@ -201,7 +263,7 @@ export default class Preloader extends EventEmitter {
           {
             yPercent: 0,
             stagger: 0.04,
-            ease: 'back-out(2.5)'
+            ease: 'back.out(1.8)'
           },
           'intro-text'
         )
@@ -210,7 +272,7 @@ export default class Preloader extends EventEmitter {
           {
             yPercent: 0,
             stagger: 0.04,
-            ease: 'back-out(2.5)'
+            ease: 'back.out(1.8)'
           },
           'intro-text'
         )
@@ -293,39 +355,6 @@ export default class Preloader extends EventEmitter {
           },
           onComplete: resolve
         })
-        // .to(this.roomChildren.rectlight.scale, {
-        //   x: 1,
-        //   y: 1,
-        //   z: 1,
-        //   onComplete: () => {
-        //     console.log(this.roomClass)
-        //     console.log(this.roomClass.turnOnTheLight)
-        //     if (this.themeString === 'dark') {
-        //       console.log('puspita')
-        //       this.roomClass.turnOnTheLight(this.themeString)
-        //       // console.log(this.room.turnOnTheLight())
-        //     }
-        //     resolve()
-        //   }
-        // })
-      // } else {
-      //   this.secondTimeline
-      //     .to(this.roomChildren.cube.scale, {
-      //       x: 1.4,
-      //       y: 1.4,
-      //       z: 1.4,
-      //       ease: 'back.out(2.5)'
-      //       // duration: 3
-      //     })
-      //     .to(this.room.position, {
-      //       x: 0,
-      //       y: 0,
-      //       z: 0,
-      //       ease: 'power1.out',
-      //       duration: 0.7,
-      //       onComplete: resolve
-      //     })
-      // }
     })
   }
 
@@ -358,6 +387,11 @@ export default class Preloader extends EventEmitter {
 
   async playIntro() {
     this.scaleFlag = true
+    let introTextUnit = document.querySelectorAll('.intro-hidden-first')
+
+    for (let element of introTextUnit) {
+      element.style.display = 'none'
+    }
     await this.firstIntro()
     this.moveFlag = true
     this.scrollOnceEvent = this.onScroll.bind(this)
