@@ -14,6 +14,7 @@ export default class Preloader extends EventEmitter {
     this.scene = this.experience.scene
     this.sizes = this.experience.sizes
     this.resources = this.experience.resources
+    this.computerVideo = this.resources.items.screen.source.data
     this.camera = this.experience.camera
     this.world = this.experience.world
     this.device = this.sizes.device
@@ -33,6 +34,8 @@ export default class Preloader extends EventEmitter {
     this.theme.on('switch', (theme) => {
       this.themeString = theme
     })
+
+    this.pageWrapper = document.querySelector('.page-wrapper')
   }
 
   setAssets() {
@@ -40,8 +43,10 @@ export default class Preloader extends EventEmitter {
     addAnimation(document.querySelectorAll('.intro-hidden-first'))
     convert(document.querySelector('.hero-main-title'))
     convert(document.querySelector('.hero-main-description'))
-    convert(document.querySelector('.hero-second-subheading'))
-    convert(document.querySelector('.second-sub'))
+    // convert(document.querySelector('.hero-desc-mobile'))
+    // convert(document.querySelector('.hero-desc-desktop'))
+    // convert(document.querySelector('.hero-second-subheading'))
+    // convert(document.querySelector('.second-sub'))
     this.room = this.experience.world.room.actualRoom
     this.roomChildren = this.experience.world.room.roomChildren
   }
@@ -118,14 +123,14 @@ export default class Preloader extends EventEmitter {
   }
 
   secondIntro() {
-    let introTextUnit = document.querySelectorAll('.intro-hidden-first')
+    // let introTextUnit = document.querySelectorAll('.intro-hidden-first')
 
     return new Promise((resolve) => {
-      let introAppearFirst = document.querySelectorAll('.intro-appear-first')
+      // let introAppearFirst = document.querySelectorAll('.intro-appear-first')
 
-      introAppearFirst.forEach((element) => {
-        element.style.overflow = 'visible'
-      })
+      // introAppearFirst.forEach((element) => {
+      //   element.style.overflow = 'visible'
+      // })
 
       this.secondTimeline = new GSAP.timeline()
 
@@ -135,40 +140,68 @@ export default class Preloader extends EventEmitter {
         })
         .to('.intro-appear-firstTwo .animatedis', {
           x: 50.47,
-          ease: 'power1.out',
-          onComplete: () => {
-            let localTimeline = new GSAP.timeline()
-
-            introTextUnit.forEach((element) => {
-              localTimeline.to(
-                element,
-                {
-                  duration: 0,
-                  display: 'table-cell'
-                },
-                'text-shift'
-              )
-            })
-
-            localTimeline
-              .to(
-                '.intro-appear-firstTwo',
-                {
-                  x: -50.47,
-                  duration: 0
-                },
-                'text-shift'
-              )
-              .to(
-                '.intro-text',
-                {
-                  x: 7.5,
-                  duration: 0
-                },
-                'text-shift'
-              )
-          }
+          ease: 'power1.out'
         })
+        .to(
+          '.intro-hidden-first',
+          {
+            duration: 0,
+            display: 'table-cell'
+          },
+          'text-shift'
+        )
+        .to(
+          '.intro-appear-firstTwo',
+          {
+            x: -50.47,
+            duration: 0
+          },
+          'text-shift'
+        )
+        .to(
+          '.intro-text',
+          {
+            x: 7.5,
+            duration: 0
+          },
+          'text-shift'
+        )
+      // .to('.intro-appear-firstTwo .animatedis', {
+      //   x: 50.47,
+      //   ease: 'power1.out',
+      //   onComplete: () => {
+      //     let localTimeline = new GSAP.timeline()
+
+      //     introTextUnit.forEach((element) => {
+      //       localTimeline.to(
+      //         element,
+      //         {
+      //           duration: 0,
+      //           display: 'table-cell'
+      //         },
+      //         'text-shift'
+      //       )
+      //     })
+
+      //     localTimeline
+      //       .to(
+      //         '.intro-appear-firstTwo',
+      //         {
+      //           x: -50.47,
+      //           duration: 0
+      //         },
+      //         'text-shift'
+      //       )
+      //       .to(
+      //         '.intro-text',
+      //         {
+      //           x: 11.5,
+      //           duration: 0
+      //         },
+      //         'text-shift'
+      //       )
+      //   }
+      // })
 
       this.secondTimeline
         .to('.intro-hidden-first .animate-second', {
@@ -187,7 +220,7 @@ export default class Preloader extends EventEmitter {
         .to('.intro-text .animateall', {
           yPercent: 100,
           stagger: 0.04,
-          ease: 'back.in(2.5)'
+          ease: 'back.in(2)'
         })
         .to(
           this.roomChildren.cube.scale,
@@ -258,76 +291,91 @@ export default class Preloader extends EventEmitter {
           },
           'intro-text'
         )
+        // .to(
+        //   '.first-sub .animatedis',
+        //   {
+        //     yPercent: 0,
+        //     stagger: 0.04,
+        //     ease: 'back.out(1.8)'
+        //   },
+        //   'intro-text'
+        // )
+        // .to(
+        //   '.hero-desc-mobile .animatedis',
+        //   {
+        //     yPercent: 0,
+        //     stagger: 0.04,
+        //     ease: 'back.out(1.8)'
+        //   },
+        //   'intro-text'
+        // )
+        // .to(
+        //   '.hero-desc-desktop .animatedis',
+        //   {
+        //     yPercent: 0,
+        //     stagger: 0.04,
+        //     ease: 'back.out(1.8)'
+        //   },
+        //   'intro-text'
+        // )
         .to(
-          '.first-sub .animatedis',
+          '.social-link',
           {
-            yPercent: 0,
-            stagger: 0.04,
-            ease: 'back.out(1.8)'
+            stagger: 0.2,
+            opacity: 1
           },
           'intro-text'
         )
         .to(
-          '.second-sub .animatedis',
+          this.roomChildren.desks.scale,
           {
-            yPercent: 0,
-            stagger: 0.04,
-            ease: 'back.out(1.8)'
+            x: 1,
+            y: 1,
+            z: 1,
+            ease: 'back.out(2.2)',
+            duration: 0.5
           },
-          'intro-text'
+          '<+=0.3'
         )
-        .to(this.roomChildren.desks.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.5
-        })
-        .to(this.roomChildren.aquarium.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.5
-        })
-        .to(this.roomChildren.fish.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.5
-        })
+        .to(
+          this.roomChildren.aquarium.scale,
+          {
+            x: 1,
+            y: 1,
+            z: 1,
+            ease: 'back.out(2.2)',
+            duration: 0.5
+          },
+          '<+=0.3'
+        )
+        .to(
+          this.roomChildren.fish.scale,
+          {
+            x: 1,
+            y: 1,
+            z: 1,
+            ease: 'back.out(2.2)',
+            duration: 0.5
+          },
+          7
+        )
         .to(
           this.roomChildren.chair.scale,
           {
             x: 1,
             y: 1,
-            z: 1
+            z: 1,
+            ease: 'back.out(2.2)'
           },
-          'chair'
+          7
         )
         .to(
           this.roomChildren.chair.rotation,
           {
             y: 4 * Math.PI + Math.PI / 2
           },
-          'chair'
+          7
         )
-        .to(this.roomChildren.clock.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.5
-        })
-        .to(this.roomChildren.table_stuff.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.5
-        })
-        .to(this.roomChildren.computer.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.5
-        })
         .to(
           this.roomChildren.floor_items.scale,
           {
@@ -335,26 +383,68 @@ export default class Preloader extends EventEmitter {
             y: 1,
             z: 1
           },
-          'chair'
+          7
         )
-        .to(this.roomChildren.mini_floor.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.5
-        })
-        .to(this.roomChildren.shelves.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.5,
-          onStart: () => {
-            if (this.themeString === 'dark') {
-              this.roomClass.turnOnTheLight(this.themeString)
-            }
+        .to(
+          this.roomChildren.mini_floor.scale,
+          {
+            x: 1,
+            y: 1,
+            z: 1,
+            duration: 0.5
           },
-          onComplete: resolve
-        })
+          7
+        )
+        .to(
+          this.roomChildren.clock.scale,
+          {
+            x: 1,
+            y: 1,
+            z: 1,
+            ease: 'back.out(2.2)',
+            duration: 0.5
+          },
+          7.25
+        )
+        .to(
+          this.roomChildren.table_stuff.scale,
+          {
+            x: 1,
+            y: 1,
+            z: 1,
+            ease: 'back.out(2.2)',
+            duration: 0.5
+          },
+          7.25
+        )
+        .to(
+          this.roomChildren.computer.scale,
+          {
+            x: 1,
+            y: 1,
+            z: 1,
+            ease: 'back.out(2.2)',
+            duration: 0.5
+          },
+          '>-0.3'
+        )
+        .to(
+          this.roomChildren.shelves.scale,
+          {
+            x: 1,
+            y: 1,
+            z: 1,
+            ease: 'back.out(2.2)',
+            duration: 0.5,
+            onStart: () => {
+              if (this.themeString === 'dark') {
+                this.roomClass.turnOnTheLight(this.themeString)
+              }
+            },
+            onComplete: resolve
+          },
+          '<+=0.1'
+        )
     })
   }
 
@@ -380,9 +470,19 @@ export default class Preloader extends EventEmitter {
   }
 
   removeEventListener() {
-    window.removeEventListener('wheel', this.scrollOnceEvent)
-    window.removeEventListener('touchstart', this.touchStart)
-    window.removeEventListener('touchmove', this.touchMove)
+    this.pageWrapper.removeEventListener('click', this.userInteraction)
+    // window.removeEventListener('wheel', this.scrollOnceEvent)
+    // window.removeEventListener('touchstart', this.touchStart)
+    // window.removeEventListener('touchmove', this.touchMove)
+  }
+
+  handleUserInteraction() {
+    // Mulai video jika belum dimulai
+    this.computerVideo.muted = false
+    this.removeEventListener()
+    this.playSecondIntro()
+
+    console.log(this.computerVideo.muted)
   }
 
   async playIntro() {
@@ -394,13 +494,15 @@ export default class Preloader extends EventEmitter {
     }
     await this.firstIntro()
     this.moveFlag = true
-    this.scrollOnceEvent = this.onScroll.bind(this)
-    this.touchStart = this.onTouch.bind(this)
-    this.touchMove = this.onTouchMove.bind(this)
+    this.userInteraction = this.handleUserInteraction.bind(this)
+    // this.scrollOnceEvent = this.onScroll.bind(this)
+    // this.touchStart = this.onTouch.bind(this)
+    // this.touchMove = this.onTouchMove.bind(this)
 
-    window.addEventListener('wheel', this.scrollOnceEvent)
-    window.addEventListener('touchstart', this.touchStart)
-    window.addEventListener('touchmove', this.touchMove)
+    this.pageWrapper.addEventListener('click', this.userInteraction)
+    // window.addEventListener('wheel', this.scrollOnceEvent)
+    // window.addEventListener('touchstart', this.touchStart)
+    // window.addEventListener('touchmove', this.touchMove)
   }
 
   async playSecondIntro() {
