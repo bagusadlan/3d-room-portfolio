@@ -448,32 +448,8 @@ export default class Preloader extends EventEmitter {
     })
   }
 
-  onScroll(e) {
-    if (e.deltaY > 0) {
-      this.removeEventListener()
-      this.playSecondIntro()
-    }
-  }
-
-  onTouch(e) {
-    this.initialY = e.touches[0].clientY
-  }
-
-  onTouchMove(e) {
-    let currentY = e.touches[0].clientY
-    let differenceY = this.initialY - currentY
-    if (differenceY > 0) {
-      this.removeEventListener()
-      this.playSecondIntro()
-    }
-    this.initialY = null
-  }
-
   removeEventListener() {
     this.pageWrapper.removeEventListener('click', this.userInteraction)
-    // window.removeEventListener('wheel', this.scrollOnceEvent)
-    // window.removeEventListener('touchstart', this.touchStart)
-    // window.removeEventListener('touchmove', this.touchMove)
   }
 
   handleUserInteraction() {
@@ -481,8 +457,6 @@ export default class Preloader extends EventEmitter {
     this.computerVideo.muted = false
     this.removeEventListener()
     this.playSecondIntro()
-
-    console.log(this.computerVideo.muted)
   }
 
   async playIntro() {
@@ -495,14 +469,8 @@ export default class Preloader extends EventEmitter {
     await this.firstIntro()
     this.moveFlag = true
     this.userInteraction = this.handleUserInteraction.bind(this)
-    // this.scrollOnceEvent = this.onScroll.bind(this)
-    // this.touchStart = this.onTouch.bind(this)
-    // this.touchMove = this.onTouchMove.bind(this)
 
     this.pageWrapper.addEventListener('click', this.userInteraction)
-    // window.addEventListener('wheel', this.scrollOnceEvent)
-    // window.addEventListener('touchstart', this.touchStart)
-    // window.addEventListener('touchmove', this.touchMove)
   }
 
   async playSecondIntro() {

@@ -30,7 +30,6 @@ export default class Controls {
 
     document.querySelector('.page').style.overflow = 'visible'
 
-    this.setEventListener()
     this.setSmoothScroll()
     this.setScrollTrigger()
   }
@@ -97,24 +96,6 @@ export default class Controls {
 
   //   requestAnimationFrame(raf)
   // }
-
-  setEventListener() {
-    this.userInteraction = this.handleUserInteraction.bind(this)
-    window.addEventListener('click', this.userInteraction)
-    // window.addEventListener('touchstart', this.userInteraction);
-  }
-
-  handleUserInteraction() {
-    // Mulai video jika belum dimulai
-    // if (this.computerVideo.paused) {
-    this.computerVideo.muted = false
-
-    // Hapus event listener setelah interaksi pertama
-    window.removeEventListener('click', this.userInteraction)
-    // window.removeEventListener('touchstart', this.userInteraction);
-    // }
-    console.log(this.computerVideo.muted)
-  }
 
   setScrollTrigger() {
     ScrollTrigger.matchMedia({
