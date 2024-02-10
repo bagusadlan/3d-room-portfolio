@@ -17,6 +17,7 @@
   "dependencies": {
     "@ashthornton/asscroll": "^2.0.11",
     "@studio-freight/lenis": "^1.0.16",
-    "events": "^3.3.0"
+    "events": "^3.3.0",
+    "remixicon": "^4.1.0"
   }
 }
