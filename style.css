@@ -26,12 +26,16 @@ svg {
   --color-red-light: #ff6961;
   --color-toggle-light: #f3f3f3;
   --color-toggle-circle-light: white;
+  --color-social-icon-light: #5f77bf;
+  --color-social-icon-shadow-light: 255, 255, 255;
 
   /* Dark Theme Variables */
   --color-text-dark: #faf4e5;
   --color-background-dark: #8395cd;
   --color-toggle-dark: #8395cd;
   --color-toggle-circle-dark: #5f77bf;
+  --color-social-icon-dark: #5f77bf;
+  --color-social-icon-shadow-dark: 0, 0, 0;
 }
 
 .light-theme {
@@ -43,6 +47,8 @@ svg {
   --color-text-white: var(--color-text-dark);
   --color-toggle: var(--color-toggle-light);
   --color-toggle-circle: var(--color-toggle-circle-light);
+  --color-social-icon: var(--color-social-icon-dark);
+  --color-social-icon-shadow: var(--color-social-icon-shadow-dark);
 }
 
 .dark-theme {
@@ -54,6 +60,8 @@ svg {
   --color-text-white: var(--color-text-dark);
   --color-toggle: var(--color-toggle-dark);
   --color-toggle-circle: var(--color-toggle-circle-dark);
+  --color-social-icon: var(--color-social-icon-light);
+  --color-social-icon-shadow: var(--color-social-icon-shadow-light);
 }
 
 /* body.dark-theme {
@@ -526,6 +534,15 @@ label:hover .circle {
   color: var(--color-text);
 }
 
+.hero-main-title .animatedis {
+  cursor: pointer;
+}
+
+.hero-main-title .animatedis:hover {
+  color: var(--color-social-icon);
+  transition: color 0.5s;
+}
+
 .hero-main-description {
   font-size: 18px;
   color: var(--color-text);
@@ -599,6 +616,11 @@ label:hover .circle {
   display: inline-flex;
   flex-direction: column;
   /* gap: 5px; */
+}
+
+.icon-sub a:hover i {
+  color: var(--color-social-icon);
+  transition: color 0.5s;
 }
 
 .social-link {
