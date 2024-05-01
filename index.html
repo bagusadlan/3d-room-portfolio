@@ -23,35 +23,34 @@
 
     <div class="page" asscroll-container>
       <div class="toggle-bar">
-        <div class="sun-wrapper">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24"
-            viewBox="0 -960 960 960"
-            width="24"
-          >
-            <path
+        <input type="checkbox" id="toggle" />
+
+        <label for="toggle">
+          <div class="circle">
+            <svg
+              class="sun w-6 h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
               fill="currentColor"
-              d="M440-760v-160h80v160h-80Zm266 110-55-55 112-115 56 57-113 113Zm54 210v-80h160v80H760ZM440-40v-160h80v160h-80ZM254-652 140-763l57-56 113 113-56 54Zm508 512L651-255l54-54 114 110-57 59ZM40-440v-80h160v80H40Zm157 300-56-57 112-112 29 27 29 28-114 114Zm283-100q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm0-80q66 0 113-47t47-113q0-66-47-113t-113-47q-66 0-113 47t-47 113q0 66 47 113t113 47Zm0-160Z"
-            />
-          </svg>
-        </div>
-        <div class="toggle-button">
-          <div class="toggle-circle"></div>
-        </div>
-        <div class="moon-wrapper">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24"
-            viewBox="0 -960 960 960"
-            width="24"
-          >
-            <path
+            >
+              <path
+                d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"
+              />
+            </svg>
+            <svg
+              class="moon w-6 h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
               fill="currentColor"
-              d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"
-            />
-          </svg>
-        </div>
+            >
+              <path
+                fill-rule="evenodd"
+                d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+        </label>
       </div>
       <div class="page-wrapper" asscroll>
         <section class="hero">
@@ -86,16 +85,32 @@
               <!-- <p class="hero-second-subheading first-sub">Know More</p>
               <p class="hero-second-subheading second-sub">About Me</p> -->
               <div class="icon-sub">
-                <a class="social-link github-link" href="https://github.com/bagusadlan" target="_blank">
+                <a
+                  class="social-link github-link"
+                  href="https://github.com/bagusadlan"
+                  target="_blank"
+                >
                   <i class="ri-github-fill"></i>
                 </a>
-                <a class="social-link linkedin-link" href="https://linkedin.com/in/bagusadlan" target="_blank">
+                <a
+                  class="social-link linkedin-link"
+                  href="https://linkedin.com/in/bagusadlan"
+                  target="_blank"
+                >
                   <i class="ri-linkedin-box-fill"></i>
                 </a>
-                <a class="social-link email-link" href="mailto:bagusadlann@gmail.com" target="_blank">
+                <a
+                  class="social-link email-link"
+                  href="mailto:bagusadlann@gmail.com"
+                  target="_blank"
+                >
                   <i class="ri-mail-fill"></i>
                 </a>
-                <a class="social-link email-link" href="https://instagram.com/bagusadlan" target="_blank">
+                <a
+                  class="social-link email-link"
+                  href="https://instagram.com/bagusadlan"
+                  target="_blank"
+                >
                   <i class="ri-instagram-fill"></i>
                 </a>
               </div>
@@ -134,8 +149,16 @@
               applications
             </p>
             <h3 class="section-heading">Education</h3>
-            <p class="section-text">Electronic Engineering Polytechnic Institute of Surabaya (EEPIS) (3.5 GPA)</p>
-            <a class="cv-button" href="/documents/Bagus Adlan Fadhilah - Resume - 02 Feb 24.pdf" target="_blank">See My CV</a>
+            <p class="section-text">
+              Electronic Engineering Polytechnic Institute of Surabaya (EEPIS)
+              (3.5 GPA)
+            </p>
+            <a
+              class="cv-button"
+              href="/documents/Bagus Adlan Fadhilah - Resume - 02 Feb 24.pdf"
+              target="_blank"
+              >See My CV</a
+            >
           </div>
         </section>
 
@@ -165,22 +188,48 @@
             </div>
 
             <div class="section-detail-wrapper">
-              <h3 class="section-heading">Online Training Management Information System</h3>
+              <h3 class="section-heading">
+                Online Training Management Information System
+              </h3>
               <ul class="section-list">
-                <li class="section-text">Develop a full-stack web application using Expressjs as a REST API and React.js as the frontend</li>
-                <li class="section-text">Create a RESTful API with multiuser login</li>
-                <li class="section-text">Slicing from design to a web application</li>
-                <li class="section-text">Build a reusable component in React.js</li>
+                <li class="section-text">
+                  Develop a full-stack web application using Expressjs as a REST
+                  API and React.js as the frontend
+                </li>
+                <li class="section-text">
+                  Create a RESTful API with multiuser login
+                </li>
+                <li class="section-text">
+                  Slicing from design to a web application
+                </li>
+                <li class="section-text">
+                  Build a reusable component in React.js
+                </li>
               </ul>
-              <h3 class="section-heading">Digitalization wedding invitation - datengya.id</h3>
+              <h3 class="section-heading">
+                Digitalization wedding invitation - datengya.id
+              </h3>
               <ul class="section-list">
-                <li class="section-text">Design a wedding invitation and transform it into web with html and css only</li>
-                <li class="section-text">Data management using jQuery and vanilla javascript</li>
+                <li class="section-text">
+                  Design a wedding invitation and transform it into web with
+                  html and css only
+                </li>
+                <li class="section-text">
+                  Data management using jQuery and vanilla javascript
+                </li>
               </ul>
-              <h3 class="section-heading">Laboratorium Information Management System</h3>
+              <h3 class="section-heading">
+                Laboratorium Information Management System
+              </h3>
               <ul class="section-list">
-                <li class="section-text">Develop a full-stack web application using with Express.js serving a REST API with Nuxt.js as the frontend</li>
-                <li class="section-text">Implement Agile and Scrum as the SDLC to develop the application</li>
+                <li class="section-text">
+                  Develop a full-stack web application using with Express.js
+                  serving a REST API with Nuxt.js as the frontend
+                </li>
+                <li class="section-text">
+                  Implement Agile and Scrum as the SDLC to develop the
+                  application
+                </li>
                 <li class="section-text">Create REST API using express.js</li>
                 <li class="section-text">Design database and structure</li>
               </ul>
@@ -219,22 +268,80 @@
               <div class="experience-area">Surabaya</div>
             </div>
             <ul class="section-list">
-              <li class="section-text">Build an admin website that provides a dashboard for patient data and hospital examinations</p>
-              <li class="section-text">Responsible for developed REST API using Express.js and PostgreSQL to store data from laboratorium management systems</p>
-              <li class="section-text">Help the frontend using Nuxtjs</p>
+              <li class="section-text">
+                Build an admin website that provides a dashboard for patient
+                data and hospital examinations
+              </li>
+              <li class="section-text">
+                Responsible for developed REST API using Express.js and
+                PostgreSQL to store data from laboratorium management systems
+              </li>
+              <li class="section-text">Help the frontend using Nuxtjs</li>
             </ul>
 
             <h3 class="section-heading">Sertification</h3>
-              <a class="certificate-link" href="https://www.dicoding.com/certificates/1RXY1L48MPVM" target="_blank">Belajar Membangun Arsitektur Microservices | dicoding.com</a>
-              <a class="certificate-link" href="https://www.dicoding.com/certificates/6RPN48534X2M" target="_blank">Belajar Implementasi CI CD | dicoding.com</a>
-              <a class="certificate-link" href="https://drive.google.com/file/d/10RJ32NQaxYl4Zs3O6KnTc1Cau5EyvVSD/view" target="_blank">Pengembangan Back-End Menggunakan Javascript dan Node.js (Daring) | kelas.com</a>
-              <a class="certificate-link" href="https://www.dicoding.com/certificates/NVP78YWQVXR0" target="_blank">Menjadi Linux System Administrator | dicoding.com</a>
-              <a class="certificate-link" href="https://www.dicoding.com/certificates/QLZ9RDNRMP5D" target="_blank">Memulai Pemrograman Dengan C | dicoding.com</a>
-              <a class="certificate-link" href="https://www.dicoding.com/certificates/RVZKO49WNPD5" target="_blank">Belajar Jaringan Komputer untuk Pemula | dicoding.com</a>
-              <a class="certificate-link" href="https://www.dicoding.com/certificates/NVP7OYRWVPR0" target="_blank">Belajar Dasar-Dasar DevOps | dicoding.com</a>
-              <a class="certificate-link" href="https://www.dicoding.com/certificates/N9ZO631QRXG5" target="_blank">Belajar Membuat Aplikasi Back-End untuk Pemula | dicoding.com</a>
-              <a class="certificate-link" href="https://www.dicoding.com/certificates/0LZ09OEW3Z65" target="_blank">Belajar Dasar Pemrograman JavaScript | dicoding.com</a>
-              <a class="certificate-link" href="https://www.dicoding.com/certificates/1OP80YJE2XQK" target="_blank">Cloud Practitioner Essentials (Belajar Dasar AWS Cloud) | dicoding.com</a>
+            <a
+              class="certificate-link"
+              href="https://www.dicoding.com/certificates/1RXY1L48MPVM"
+              target="_blank"
+              >Belajar Membangun Arsitektur Microservices | dicoding.com</a
+            >
+            <a
+              class="certificate-link"
+              href="https://www.dicoding.com/certificates/6RPN48534X2M"
+              target="_blank"
+              >Belajar Implementasi CI CD | dicoding.com</a
+            >
+            <a
+              class="certificate-link"
+              href="https://drive.google.com/file/d/10RJ32NQaxYl4Zs3O6KnTc1Cau5EyvVSD/view"
+              target="_blank"
+              >Pengembangan Back-End Menggunakan Javascript dan Node.js (Daring)
+              | kelas.com</a
+            >
+            <a
+              class="certificate-link"
+              href="https://www.dicoding.com/certificates/NVP78YWQVXR0"
+              target="_blank"
+              >Menjadi Linux System Administrator | dicoding.com</a
+            >
+            <a
+              class="certificate-link"
+              href="https://www.dicoding.com/certificates/QLZ9RDNRMP5D"
+              target="_blank"
+              >Memulai Pemrograman Dengan C | dicoding.com</a
+            >
+            <a
+              class="certificate-link"
+              href="https://www.dicoding.com/certificates/RVZKO49WNPD5"
+              target="_blank"
+              >Belajar Jaringan Komputer untuk Pemula | dicoding.com</a
+            >
+            <a
+              class="certificate-link"
+              href="https://www.dicoding.com/certificates/NVP7OYRWVPR0"
+              target="_blank"
+              >Belajar Dasar-Dasar DevOps | dicoding.com</a
+            >
+            <a
+              class="certificate-link"
+              href="https://www.dicoding.com/certificates/N9ZO631QRXG5"
+              target="_blank"
+              >Belajar Membuat Aplikasi Back-End untuk Pemula | dicoding.com</a
+            >
+            <a
+              class="certificate-link"
+              href="https://www.dicoding.com/certificates/0LZ09OEW3Z65"
+              target="_blank"
+              >Belajar Dasar Pemrograman JavaScript | dicoding.com</a
+            >
+            <a
+              class="certificate-link"
+              href="https://www.dicoding.com/certificates/1OP80YJE2XQK"
+              target="_blank"
+              >Cloud Practitioner Essentials (Belajar Dasar AWS Cloud) |
+              dicoding.com</a
+            >
           </div>
         </section>
       </div>
