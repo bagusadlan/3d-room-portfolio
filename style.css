@@ -24,10 +24,14 @@ svg {
   --color-orange-light: #ffb057;
   --color-blue-light: #06789d;
   --color-red-light: #ff6961;
+  --color-toggle-light: #f3f3f3;
+  --color-toggle-circle-light: white;
 
   /* Dark Theme Variables */
   --color-text-dark: #faf4e5;
   --color-background-dark: #8395cd;
+  --color-toggle-dark: #8395cd;
+  --color-toggle-circle-dark: #5f77bf;
 }
 
 .light-theme {
@@ -37,6 +41,8 @@ svg {
   --color-green: var(--color-red-light);
   --color-blue: var(--color-blue-light);
   --color-text-white: var(--color-text-dark);
+  --color-toggle: var(--color-toggle-light);
+  --color-toggle-circle: var(--color-toggle-circle-light);
 }
 
 .dark-theme {
@@ -46,6 +52,8 @@ svg {
   --color-green: var(--color-text-dark);
   --color-blue: var(--color-text-dark);
   --color-text-white: var(--color-text-dark);
+  --color-toggle: var(--color-toggle-dark);
+  --color-toggle-circle: var(--color-toggle-circle-dark);
 }
 
 /* body.dark-theme {
@@ -204,6 +212,85 @@ svg {
   100% {
     transform: translate(-50%, 5px);
   }
+}
+
+svg.sun,
+svg.moon {
+  width: 24px;
+  z-index: 999999;
+  position: absolute;
+  transition: 0.6s;
+}
+
+svg.sun {
+  color: var(--color-orange-light);
+  margin-top: 0%;
+}
+
+svg.moon {
+  margin-top: -150%;
+  color: white;
+  opacity: 0;
+}
+
+label {
+  height: 42px;
+  width: 88px;
+  border-radius: 999px;
+  background: var(--color-toggle);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5) inset;
+  cursor: pointer;
+  position: relative;
+  transition: 0.6s;
+}
+
+.circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 99px;
+  background: var(--color-toggle-circle);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3),
+    -3px -3px 5px rgba(0, 0, 0, 0.3) inset;
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(10%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.6s, width 0.3s;
+}
+
+input[type='checkbox'] {
+  display: none;
+}
+
+input[type='checkbox']:checked + label {
+  background: var(--color-toggle);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5) inset;
+}
+
+input[type='checkbox']:checked + label .circle {
+  left: 100%;
+  transform: translate(-110%, -50%);
+  background: var(--color-toggle-circle);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5),
+    -5px -5px 10px rgba(0, 0, 0, 1) inset;
+}
+
+input[type='checkbox']:checked + label .circle .sun {
+  margin-top: 150%;
+  opacity: 0;
+}
+
+input[type='checkbox']:checked + label .circle .moon {
+  margin-top: 0%;
+  opacity: 1;
+}
+
+label:hover .circle {
+  width: 40px;
 }
 
 /* Section Formating -------------------- */
